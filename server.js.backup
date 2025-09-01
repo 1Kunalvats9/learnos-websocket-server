@@ -15,7 +15,7 @@ const communityClients = new Map();
 
 // CORS middleware
 const corsMiddleware = cors({
-  origin: ['http://localhost:3000', 'https://teen-titans.vercel.app'],
+  origin: 'http://localhost:3000',
   credentials: true
 });
 
@@ -62,7 +62,7 @@ function startKeepAliveCron() {
 // Helper function to make API calls to Next.js backend
 async function makeApiCall(endpoint, options = {}) {
   try {
-    const response = await fetch(`https://teen-titans.vercel.app/api${endpoint}`, {
+    const response = await fetch(`http://localhost:3000/api${endpoint}`, {
       headers: {
         'Content-Type': 'application/json',
         'User-Agent': 'WebSocket-Server/1.0',
@@ -208,7 +208,7 @@ server.listen(PORT, () => {
   console.log(`WebSocket server running on port ${PORT}`);
   console.log(`Health check available at http://localhost:${PORT}/health`);
   console.log(`Keep-alive endpoint available at http://localhost:${PORT}/keep-alive`);
-  console.log(`Using Next.js API at https://teen-titans.vercel.app/api for data operations`);
+  console.log(`Using Next.js API at http://localhost:3000/api for data operations`);
   
   // Start the keep-alive cron job
   keepAliveIntervalId = startKeepAliveCron();
